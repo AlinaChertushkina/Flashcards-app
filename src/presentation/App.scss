@@ -1,0 +1,28 @@
+@import './assets/styles/colors.scss';
+@import './assets/styles/fonts.scss';
+@import './assets/styles/sizes.scss';
+@import './assets/styles/tableStyle.scss';
+
+.App {
+  text-align: center;
+  margin: $margin-top;
+}
+
+h1,
+h2 {
+  font-size: $h-size;
+  font-family: $headings;
+}
+
+.word-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: $margin-top;
+  font-family: $words;
+}
+
+.word-form input {
+  margin: $margin-input;
+  padding: $padding-input;
+}

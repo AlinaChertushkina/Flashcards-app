@@ -1,0 +1,17 @@
+.word-table {
+  width: $width;
+  border-collapse: collapse;
+  margin-top: $margin-top;
+}
+
+.word-table th,
+.word-table td {
+  border: $border solid $table-border-color;
+  padding: $padding-table;
+  text-align: center;
+}
+
+.word-table th {
+  background-color: $word-table-color;
+  font-family: $headings;
+}

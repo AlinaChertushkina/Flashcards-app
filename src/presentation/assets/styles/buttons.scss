@@ -1,0 +1,33 @@
+@import './colors.scss';
+@import './fonts.scss';
+@import './sizes.scss';
+
+button {
+  padding: $margin-input 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: $margin-input;
+  margin: $margin-input;
+  font-family: $words;
+  color: $text-color;
+}
+
+.edit-btn {
+  background-color: $edit-button;
+}
+
+.delete-btn {
+  background-color: $delete-button;
+}
+
+.add-btn {
+  background-color: $add-button;
+}
+
+.save-btn {
+  background-color: $save-button;
+}
+
+.cancel-btn {
+  background-color: $cancel-button;
+}

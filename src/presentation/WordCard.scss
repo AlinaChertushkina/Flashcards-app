@@ -1,0 +1,36 @@
+@import './assets/styles/colors.scss';
+
+.word-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-card {
+  width: 20%;
+  height: 60%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: $card-background;
+}
+
+.word {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.show-translation-btn {
+  background-color: $show-translation-btn;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.show-translation-btn:hover {
+  background-color: $show-translation-btn-hover;
+}

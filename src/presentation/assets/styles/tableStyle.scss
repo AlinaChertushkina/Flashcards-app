@@ -1,17 +1,50 @@
+/*Общий стиль таблицы*/
 .word-table {
   width: $width;
-  border-collapse: collapse;
-  margin-top: $margin-top;
+  border: none;
+  margin-bottom: $margin-top;
 }
 
-.word-table th,
-.word-table td {
-  border: $border solid $table-border-color;
-  padding: $padding-table;
+/*Стиль шапки таблицы*/
+.word-table thead th {
+  font-weight: bold;
   text-align: center;
+  font-family: $headings;
+  border: none;
+  padding: $padding-button $padding-thead;
+  background: $word-table-background;
+  font-size: $table-heading;
 }
 
-.word-table th {
-  background-color: $word-table-color;
-  font-family: $headings;
+/*Скругление левого верхнего угла заголовка*/
+.word-table thead tr th:first-child {
+  border-radius: $padding-table 0 0 $padding-table;
+}
+
+/*Cкругление правого верхнего угла заголовка*/
+.word-table thead tr th:last-child {
+  border-radius: 0 $padding-table $padding-table 0;
+}
+
+/* Стили ячеек таблицы */
+.word-table tbody td {
+  text-align: center;
+  border: none;
+  font-family: $words;
+  padding: $padding-button $padding-thead;
+}
+
+/*Стили четных строк таблицы*/
+.word-table tbody tr:nth-child(even) {
+  background: $even-child-background;
+}
+
+/*Скругление левого нижнего угла ячейки*/
+.word-table tbody tr td:first-child {
+  border-radius: $padding-table 0 0 $padding-table;
+}
+
+/*Скругление правого нижнего угла ячейки*/
+.word-table tbody tr td:last-child {
+  border-radius: 0 $padding-table $padding-table 0;
 }

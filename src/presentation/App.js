@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { data } from './data/data';
 import './assets/styles/buttons.scss';
+import { WordCard } from './WordCard';
 
 function App() {
   const [words, setWords] = useState(data);
@@ -24,7 +25,7 @@ function App() {
     setEditingId(null); // Обнуление editingId
   };
 
-  // Функция обработки новых слов или одновления существующих
+  // Функция обработки новых слов или обновления существующих
   const handleSave = () => {
     // Если editingId равен нулю, это значит, то мы добавляем новое слово
     if (editingId === null) {
@@ -45,109 +46,132 @@ function App() {
     setEditingId(null);
   };
 
-  // Хук useEffect для проведения действий, когда массив words меняется
+  // Хук для проведения действий, когда массив words меняется
   useEffect(() => {}, [words]);
 
-  // Создаем таблицу со словами транскрипцией и кнопками
+  const [showCards, setShowCards] = useState(false);
+
+  const handleLearnWords = () => {
+    setShowCards(true);
+  };
+
+  // Создаем таблицу со словами, транскрипцией и кнопками
   return (
     <div className="App">
       <h1>Список моих слов</h1>
-      <table className="word-table">
-        <thead>
-          <tr>
-            <th>Английский</th>
-            <th>Транскрипция</th>
-            <th>Русский</th>
-            <th>Теги</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody>
+      {!showCards && (
+        <button className="learn-words-btn" onClick={handleLearnWords}>
+          Учить слова
+        </button>
+      )}
+      {showCards && (
+        <div className="word-cards">
           {words.map((word) => (
-            <tr key={word.id}>
-              <td>
-                {editingId === word.id ? (
-                  <input
-                    type="text"
-                    value={newWord.english}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, english: e.target.value })
-                    }
-                  />
-                ) : (
-                  word.english
-                )}
-              </td>
-              <td>
-                {editingId === word.id ? (
-                  <input
-                    type="text"
-                    value={newWord.transcription}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, transcription: e.target.value })
-                    }
-                  />
-                ) : (
-                  word.transcription
-                )}
-              </td>
-              <td>
-                {editingId === word.id ? (
-                  <input
-                    type="text"
-                    value={newWord.russian}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, russian: e.target.value })
-                    }
-                  />
-                ) : (
-                  word.russian
-                )}
-              </td>
-              <td>
-                {editingId === word.id ? (
-                  <input
-                    type="text"
-                    value={newWord.tags}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, tags: e.target.value })
-                    }
-                  />
-                ) : (
-                  word.tags
-                )}
-              </td>
-              <td>
-                {editingId === word.id ? (
-                  <div>
-                    <button className="save-btn" onClick={handleSave}>
-                      Сохранить
-                    </button>
-                    <button className="cancel-btn" onClick={handleCancel}>
-                      Отмена
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleEdit(word.id)}
-                    >
-                      Редактировать
-                    </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => handleDelete(word.id)}
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                )}
-              </td>
-            </tr>
+            <WordCard key={word.id} word={word} />
           ))}
-        </tbody>
-      </table>
+        </div>
+      )}
+      {!showCards && (
+        <table className="word-table">
+          <thead>
+            <tr>
+              <th>Английский</th>
+              <th>Транскрипция</th>
+              <th>Русский</th>
+              <th>Теги</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {words.map((word) => (
+              <tr key={word.id}>
+                <td>
+                  {editingId === word.id ? (
+                    <input
+                      type="text"
+                      value={newWord.english}
+                      onChange={(e) =>
+                        setNewWord({ ...newWord, english: e.target.value })
+                      }
+                    />
+                  ) : (
+                    word.english
+                  )}
+                </td>
+                <td>
+                  {editingId === word.id ? (
+                    <input
+                      type="text"
+                      value={newWord.transcription}
+                      onChange={(e) =>
+                        setNewWord({
+                          ...newWord,
+                          transcription: e.target.value,
+                        })
+                      }
+                    />
+                  ) : (
+                    word.transcription
+                  )}
+                </td>
+                <td>
+                  {editingId === word.id ? (
+                    <input
+                      type="text"
+                      value={newWord.russian}
+                      onChange={(e) =>
+                        setNewWord({ ...newWord, russian: e.target.value })
+                      }
+                    />
+                  ) : (
+                    word.russian
+                  )}
+                </td>
+                <td>
+                  {editingId === word.id ? (
+                    <input
+                      type="text"
+                      value={newWord.tags}
+                      onChange={(e) =>
+                        setNewWord({ ...newWord, tags: e.target.value })
+                      }
+                    />
+                  ) : (
+                    word.tags
+                  )}
+                </td>
+                <td>
+                  {editingId === word.id ? (
+                    <div>
+                      <button className="save-btn" onClick={handleSave}>
+                        Сохранить
+                      </button>
+                      <button className="cancel-btn" onClick={handleCancel}>
+                        Отмена
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        className="edit-btn"
+                        onClick={() => handleEdit(word.id)}
+                      >
+                        Редактировать
+                      </button>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(word.id)}
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
       <h2>Добавить новое слово</h2>
       <div className="word-form">
         <input

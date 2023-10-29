@@ -49,13 +49,13 @@ function App() {
   // Хук для проведения действий, когда массив words меняется
   useEffect(() => {}, [words]);
 
-  const [showCards, setShowCards] = useState(false);
+  const [showCards, setShowCards] = useState(false); //Добавила состояние показа карточек
 
   const handleLearnWords = () => {
     setShowCards(true);
   };
 
-  // Создаем таблицу со словами, транскрипцией и кнопками
+  // Создаем таблицу со словами, транскрипцией и кнопками, и добавила кнопку для показа карточек
   return (
     <div className="App">
       <h1>Список моих слов</h1>

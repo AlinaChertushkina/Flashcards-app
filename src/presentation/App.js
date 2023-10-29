@@ -25,16 +25,19 @@ function App() {
     setEditingId(null); // Обнуление editingId
   };
 
-  // Функция обработки новых слов или обновления существующих
+  // Переписала этот кусочек, добавила проверку на пустые значения русских и английских слов
   const handleSave = () => {
-    // Если editingId равен нулю, это значит, то мы добавляем новое слово
     if (editingId === null) {
+      if (newWord.english === '' || newWord.russian === '') {
+        alert('Заполните все поля');
+        return;
+      }
       setWords([...words, { ...newWord, id: Date.now().toString() }]);
-      setNewWord({ english: '', transcription: '', russian: '', tags: '' });
+      setNewWord({ english: '', russian: '' });
     } else {
       const updatedWords = words.map((word) =>
         word.id === editingId ? { ...newWord, id: editingId } : word,
-      ); // Если есть значение editingId, значит мы обновляем существующее слово
+      );
       setWords(updatedWords);
       setEditingId(null);
     }

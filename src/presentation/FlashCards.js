@@ -30,7 +30,7 @@ function FlashCards({ words }) {
 }
 
 FlashCards.defaultProps = {
-  words: 'Ошибка сервера',
+  words: [],
 };
 
 export { FlashCards };

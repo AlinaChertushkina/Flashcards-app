@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.scss';
 import { data } from './data/data';
 import './assets/styles/buttons.scss';
-import { WordCard } from './WordCard';
 import { WordTable } from './WordTable';
 import { WordForm } from './WordForm';
+import { FlashCards } from './FlashCards';
 
 function App() {
   const [words, setWords] = useState(data);
@@ -60,7 +60,7 @@ function App() {
     setShowCards(true);
   };
 
-  // Таблица со словами, транскрипцией и кнопками, и добавила кнопку для показа карточек
+  // Таблица со словами, транскрипцией и кнопками, добавила кнопку для показа карточек
   return (
     <div className="App">
       <h1>Список моих слов</h1>
@@ -71,9 +71,7 @@ function App() {
       )}
       {showCards && (
         <div className="word-cards">
-          {words.map((word) => (
-            <WordCard key={word.id} word={word} />
-          ))}
+          <FlashCards words={words} />
         </div>
       )}
       {!showCards && (

@@ -13,23 +13,24 @@ button {
 }
 
 .edit-btn {
-  background-color: $edit-button;
+  box-shadow: 0 5px 15px 0 $edit-button;
 }
 
 .delete-btn {
-  background-color: $delete-button;
+  box-shadow: 0 5px 15px 0 $delete-button;
 }
 
 .add-btn {
-  background-color: $add-button;
+  background-color: $show-translation-btn;
+  color: #fff;
 }
 
 .save-btn {
-  background-color: $save-button;
+  box-shadow: 0 5px 15px 0 $save-button;
 }
 
 .cancel-btn {
-  background-color: $cancel-button;
+  box-shadow: 0 5px 15px 0 $cancel-button;
 }
 
 .learn-words-btn {

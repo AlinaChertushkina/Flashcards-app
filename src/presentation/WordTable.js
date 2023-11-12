@@ -4,6 +4,7 @@ const WordTable = ({
   words,
   editingId,
   newWord,
+  setNewWord,
   handleEdit,
   handleDelete,
   handleSave,

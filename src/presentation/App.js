@@ -91,7 +91,10 @@ function App() {
         newWord={newWord}
         setNewWord={setNewWord}
         handleSave={handleSave}
-      />{' '}
+        handleChange={(field, value) =>
+          setNewWord({ ...newWord, [field]: value })
+        }
+      />
     </div>
   );
 }

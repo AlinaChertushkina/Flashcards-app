@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.scss';
 import './WordCard.scss';
 
 function WordCard({ word }) {
   const [showTranslation, setShowTranslation] = useState(false); // состояние для показа/скрытия перевода
+
+  //Для того, чтобы у новой карточки перевод был снова спрятан
+  useEffect(() => {
+    setShowTranslation(false);
+  }, [word]);
 
   const handleShowTranslation = () => {
     setShowTranslation(true);

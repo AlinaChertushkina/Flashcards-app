@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { data } from './data/data';
 import './assets/styles/buttons.scss';
 import { WordTable } from './WordTable';
 import { WordForm } from './WordForm';
 import { FlashCards } from './FlashCards';
+import { Header } from './Header';
+// import Logo from './Logo';
 
 function App() {
   const [words, setWords] = useState(data);
@@ -54,47 +57,39 @@ function App() {
   // Хук для проведения действий, когда массив words меняется
   useEffect(() => {}, [words]);
 
-  const [showCards, setShowCards] = useState(false); //Добавила состояние показа карточек
-
-  const handleLearnWords = () => {
-    setShowCards(true);
-  };
-
-  // Таблица со словами, транскрипцией и кнопками, добавила кнопку для показа карточек
   return (
     <div className="App">
-      <h1>Список моих слов</h1>
-      {!showCards && (
-        <button className="learn-words-btn" onClick={handleLearnWords}>
-          Учить слова
-        </button>
-      )}
-      {showCards && (
-        <div className="word-cards">
-          <FlashCards words={words} />
-        </div>
-      )}
-      {!showCards && (
-        <WordTable
-          words={words}
-          editingId={editingId}
+      <Router>
+        <Header />
+        <h1>Список моих слов</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <WordTable
+                words={words}
+                editingId={editingId}
+                newWord={newWord}
+                setNewWord={setNewWord}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                handleSave={handleSave}
+                handleCancel={handleCancel}
+              />
+            }
+          />
+          <Route path="/game" element={<FlashCards words={words} />} />
+        </Routes>
+        <h2>Добавить новое слово</h2>
+        <WordForm
           newWord={newWord}
           setNewWord={setNewWord}
-          handleEdit={handleEdit}
-          handleDelete={handleDelete}
           handleSave={handleSave}
-          handleCancel={handleCancel}
+          handleChange={(field, value) =>
+            setNewWord({ ...newWord, [field]: value })
+          }
         />
-      )}
-      <h2>Добавить новое слово</h2>
-      <WordForm
-        newWord={newWord}
-        setNewWord={setNewWord}
-        handleSave={handleSave}
-        handleChange={(field, value) =>
-          setNewWord({ ...newWord, [field]: value })
-        }
-      />
+      </Router>
     </div>
   );
 }

@@ -7,7 +7,8 @@ import { WordTable } from './WordTable';
 import { WordForm } from './WordForm';
 import { FlashCards } from './FlashCards';
 import { Header } from './Header';
-// import Logo from './Logo';
+import { Logo } from './Logo';
+import { NotFound } from './NotFound';
 
 function App() {
   const [words, setWords] = useState(data);
@@ -60,7 +61,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header logo={<Logo />} />
         <h1>Список моих слов</h1>
         <Routes>
           <Route
@@ -79,6 +80,7 @@ function App() {
             }
           />
           <Route path="/game" element={<FlashCards words={words} />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <h2>Добавить новое слово</h2>
         <WordForm

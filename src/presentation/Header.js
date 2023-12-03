@@ -1,10 +1,10 @@
 import React from 'react';
-// import Logo from './Logo';
 import './Header.scss';
 
-function Header() {
+function Header({ logo }) {
   return (
-    <header>
+    <header className="Header">
+      {logo}
       <nav>
         <ul>
           <li>

@@ -14,6 +14,10 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(eot|jpg|jpeg|png|svg|gif)$/,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
@@ -35,21 +39,22 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'bundle'),
   },
-  devServer: {
-    static: {
-      directory: path.join(process.cwd(), 'build'),
-    },
-    client: {
-      progress: true,
-      overlay: {
-        errors: true,
-        warnings: false,
-      },
-    },
-    historyApiFallback: true,
-    open: true,
-    hot: true,
-    compress: true,
-    port: 3000,
-  },
 };
+//   devServer: {
+//     static: {
+//       directory: path.join(process.cwd(), 'build'),
+//     },
+//     client: {
+//       progress: true,
+//       overlay: {
+//         errors: true,
+//         warnings: false,
+//       },
+//     },
+//     historyApiFallback: true,
+//     open: true,
+//     hot: true,
+//     compress: true,
+//     port: 3000,
+//   },
+// };

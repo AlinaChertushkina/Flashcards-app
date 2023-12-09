@@ -4,7 +4,6 @@ import './App.scss';
 import { data } from './data/data';
 import './assets/styles/buttons.scss';
 import { WordTable } from './WordTable';
-import { WordForm } from './WordForm';
 import { FlashCards } from './FlashCards';
 import { Header } from './Header';
 import { Logo } from './Logo';
@@ -62,7 +61,6 @@ function App() {
     <div className="App">
       <Router>
         <Header logo={<Logo />} />
-        <h1>Список моих слов</h1>
         <Routes>
           <Route
             path="/"
@@ -82,15 +80,6 @@ function App() {
           <Route path="/game" element={<FlashCards words={words} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-        <h2>Добавить новое слово</h2>
-        <WordForm
-          newWord={newWord}
-          setNewWord={setNewWord}
-          handleSave={handleSave}
-          handleChange={(field, value) =>
-            setNewWord({ ...newWord, [field]: value })
-          }
-        />
       </Router>
     </div>
   );

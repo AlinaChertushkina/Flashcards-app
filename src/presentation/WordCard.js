@@ -10,8 +10,11 @@ function WordCard({ word }) {
     setShowTranslation(false);
   }, [word]);
 
+  const [learnedWords, setLearnedWords] = useState(0);
+
   const handleShowTranslation = () => {
     setShowTranslation(true);
+    setLearnedWords((prevCount) => prevCount + 1);
   };
 
   return (
@@ -27,6 +30,7 @@ function WordCard({ word }) {
           Показать перевод
         </button>
       )}
+      <p>Изучено слов: {learnedWords}</p>
     </div>
   );
 }

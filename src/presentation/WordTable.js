@@ -11,6 +11,16 @@ const WordTable = ({
   handleSave,
   handleCancel,
 }) => {
+  const handleSaveChanges = () => {
+    const hasErrors = Object.values(newWord).some((value) => value === '');
+    if (hasErrors) {
+      alert('Ошибка: заполните все поля');
+    } else {
+      console.log('Сохранение изменений:', newWord);
+      handleSave();
+    }
+  };
+
   return (
     <div>
       <h1>Список моих слов</h1>
@@ -35,6 +45,12 @@ const WordTable = ({
                     onChange={(e) =>
                       setNewWord({ ...newWord, english: e.target.value })
                     }
+                    style={{
+                      border:
+                        newWord.english === ''
+                          ? '1px solid red'
+                          : '1px solid black',
+                    }}
                   />
                 ) : (
                   word.english
@@ -46,11 +62,14 @@ const WordTable = ({
                     type="text"
                     value={newWord.transcription}
                     onChange={(e) =>
-                      setNewWord({
-                        ...newWord,
-                        transcription: e.target.value,
-                      })
+                      setNewWord({ ...newWord, transcription: e.target.value })
                     }
+                    style={{
+                      border:
+                        newWord.transcription === ''
+                          ? '1px solid red'
+                          : '1px solid black',
+                    }}
                   />
                 ) : (
                   word.transcription
@@ -64,6 +83,12 @@ const WordTable = ({
                     onChange={(e) =>
                       setNewWord({ ...newWord, russian: e.target.value })
                     }
+                    style={{
+                      border:
+                        newWord.russian === ''
+                          ? '1px solid red'
+                          : '1px solid black',
+                    }}
                   />
                 ) : (
                   word.russian
@@ -77,15 +102,21 @@ const WordTable = ({
                     onChange={(e) =>
                       setNewWord({ ...newWord, tags: e.target.value })
                     }
+                    style={{
+                      border:
+                        newWord.tags === ''
+                          ? '1px solid red'
+                          : '1px solid black',
+                    }}
                   />
                 ) : (
                   word.tags
-                )}
+                )}{' '}
               </td>
               <td>
                 {editingId === word.id ? (
                   <div>
-                    <button className="save-btn" onClick={handleSave}>
+                    <button className="save-btn" onClick={handleSaveChanges}>
                       Сохранить
                     </button>
                     <button className="cancel-btn" onClick={handleCancel}>
@@ -117,7 +148,7 @@ const WordTable = ({
       <WordForm
         newWord={newWord}
         setNewWord={setNewWord}
-        handleSave={handleSave}
+        handleSave={handleSaveChanges}
         handleChange={(field, value) =>
           setNewWord({ ...newWord, [field]: value })
         }

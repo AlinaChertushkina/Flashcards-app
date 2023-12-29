@@ -1,13 +1,29 @@
 import React from 'react';
 
 function WordForm({ newWord, handleSave, handleChange }) {
+  const handleEnglishChange = (e) => {
+    const value = e.target.value;
+    if (/^[a-zA-Z\s]+$/.test(value)) {
+      // проверяем, что введены только латинские буквы и пробелы
+      handleChange('english', value);
+    }
+  };
+
+  const handleRussianChange = (e) => {
+    const value = e.target.value;
+    if (/^[а-яА-Я\s]+$/.test(value)) {
+      // проверяем, что введены только кириллические буквы и пробелы
+      handleChange('russian', value);
+    }
+  };
+
   return (
     <div className="word-form">
       <input
         type="text"
         placeholder="Английский"
         value={newWord.english}
-        onChange={(e) => handleChange('english', e.target.value)}
+        onChange={handleEnglishChange}
       />
       <input
         type="text"
@@ -19,7 +35,7 @@ function WordForm({ newWord, handleSave, handleChange }) {
         type="text"
         placeholder="Русский"
         value={newWord.russian}
-        onChange={(e) => handleChange('russian', e.target.value)}
+        onChange={handleRussianChange}
       />
       <input
         type="text"

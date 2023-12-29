@@ -13,12 +13,34 @@ const WordTable = ({
 }) => {
   const handleSaveChanges = () => {
     const hasErrors = Object.values(newWord).some((value) => value === '');
+
     if (hasErrors) {
       alert('Ошибка: заполните все поля');
     } else {
       console.log('Сохранение изменений:', newWord);
       handleSave();
     }
+  };
+
+  const isLatin = (text) => {
+    const latinRegex = /^[a-zA-Z ]*$/;
+    return latinRegex.test(text);
+  };
+
+  const isCyrillic = (text) => {
+    const cyrillicRegex = /^[а-яА-Я ]*$/;
+    return cyrillicRegex.test(text);
+  };
+
+  const handleChange = (field, value) => {
+    if (
+      (field === 'english' && !isLatin(value)) ||
+      (field === 'russian' && !isCyrillic(value))
+    ) {
+      return;
+    }
+
+    setNewWord({ ...newWord, [field]: value });
   };
 
   return (
@@ -42,9 +64,7 @@ const WordTable = ({
                   <input
                     type="text"
                     value={newWord.english}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, english: e.target.value })
-                    }
+                    onChange={(e) => handleChange('english', e.target.value)}
                     style={{
                       border:
                         newWord.english === ''
@@ -80,9 +100,7 @@ const WordTable = ({
                   <input
                     type="text"
                     value={newWord.russian}
-                    onChange={(e) =>
-                      setNewWord({ ...newWord, russian: e.target.value })
-                    }
+                    onChange={(e) => handleChange('russian', e.target.value)}
                     style={{
                       border:
                         newWord.russian === ''

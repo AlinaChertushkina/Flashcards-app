@@ -1,5 +1,5 @@
 import React from 'react';
-import { WordForm } from './WordForm';
+import { WordForm } from '../WordForm/WordForm';
 
 const WordTable = ({
   words,

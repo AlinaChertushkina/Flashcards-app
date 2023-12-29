@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import notFoundGif from './assets/images/404gif.gif';
+import notFoundGif from '../assets/images/404gif.gif';
 
 function NotFound() {
   return (

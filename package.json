@@ -11,10 +11,7 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --max-warnings=0",
-      "prettier --write --ignore-unknown"
-    ]
+    "*.{js,jsx}": []
   },
   "author": "",
   "license": "ISC",

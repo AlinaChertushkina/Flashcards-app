@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { WordCard } from './WordCard';
+import { WordCard } from '../WordCard/WordCard';
 
 function FlashCards({ words }) {
   const [currentIndex, setCurrentIndex] = useState(0);

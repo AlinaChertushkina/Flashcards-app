@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.scss';
+import '../App/App.scss';
 import './WordCard.scss';
 
 function WordCard({ word }) {

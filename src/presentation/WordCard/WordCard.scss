@@ -1,4 +1,4 @@
-@import './assets/styles/colors.scss';
+@import '../assets/styles/colors.scss';
 
 .card-container {
   height: 60vh;
@@ -49,13 +49,13 @@
 .btn-prev {
   width: 40px;
   height: 40px;
-  background-image: url('./assets/images/arrow-left.png');
+  background-image: url('../assets/images/arrow-left.png');
   background-size: 40px;
 }
 
 .btn-next {
   width: 40px;
   height: 40px;
-  background-image: url('./assets/images/arrow-right.png');
+  background-image: url('../assets/images/arrow-right.png');
   background-size: 40px;
 }

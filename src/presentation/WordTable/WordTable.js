@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { WordForm } from '../WordForm/WordForm';
+import '../assets/styles/message.scss';
 
 const WordTable = () => {
   const { words, isLoading, error, setWords } = useContext(AppContext);
@@ -75,11 +76,11 @@ const WordTable = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="message">Загрузка...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="message">{error}</div>;
   }
 
   return (

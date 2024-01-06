@@ -11,8 +11,8 @@ import { NotFound } from '../NotFound/NotFound';
 import { AppProvider } from '../context/AppContext';
 
 function App() {
-  const [words, setWords] = useState(data);
-  const [newWord, setNewWord] = useState({
+  const [words] = useState(data);
+  const [] = useState({
     english: '',
     transcription: '',
     russian: '',

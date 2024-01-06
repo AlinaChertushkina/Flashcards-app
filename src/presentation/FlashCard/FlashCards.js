@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 import { WordCard } from '../WordCard/WordCard';
 
-function FlashCards({ words }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+function FlashCards() {
+  const { words, isLoading, error } = useContext(AppContext);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
   const handlePreviousCard = () => {
     setCurrentIndex((prevIndex) =>
@@ -15,6 +17,14 @@ function FlashCards({ words }) {
       prevIndex === words.length - 1 ? 0 : prevIndex + 1,
     );
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="card-container">

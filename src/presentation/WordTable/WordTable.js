@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 import { WordForm } from '../WordForm/WordForm';
 
-const WordTable = ({
-  words,
-  editingId,
-  newWord,
-  setNewWord,
-  handleEdit,
-  handleDelete,
-  handleSave,
-  handleCancel,
-}) => {
+const WordTable = () => {
+  const { words, isLoading, error, setWords } = useContext(AppContext);
+  const [editingId, setEditingId] = React.useState(null);
+  const [newWord, setNewWord] = React.useState({
+    english: '',
+    transcription: '',
+    russian: '',
+    tags: '',
+  });
+
+  const handleEdit = (id) => {
+    setEditingId(id);
+  };
+
+  const handleDelete = (id) => {
+    const updatedWords = words.filter((word) => word.id !== id);
+    setWords(updatedWords);
+    setEditingId(null);
+  };
+
+  const handleSave = () => {
+    if (editingId === null) {
+      if (newWord.english === '' || newWord.russian === '') {
+        alert('Заполните все поля');
+        return;
+      }
+      setWords([...words, { ...newWord, id: Date.now().toString() }]);
+      setNewWord({ english: '', russian: '' });
+    } else {
+      const updatedWords = words.map((word) =>
+        word.id === editingId ? { ...newWord, id: editingId } : word,
+      );
+      setWords(updatedWords);
+      setEditingId(null);
+    }
+  };
+
+  const handleCancel = () => {
+    setNewWord({ english: '', transcription: '', russian: '', tags: '' });
+    setEditingId(null);
+  };
+
   const handleSaveChanges = () => {
     const hasErrors = Object.values(newWord).some((value) => value === '');
-
     if (hasErrors) {
       alert('Ошибка: заполните все поля');
     } else {
@@ -26,7 +58,6 @@ const WordTable = ({
     const latinRegex = /^[a-zA-Z ]*$/;
     return latinRegex.test(text);
   };
-
   const isCyrillic = (text) => {
     const cyrillicRegex = /^[а-яА-Я ]*$/;
     return cyrillicRegex.test(text);
@@ -42,6 +73,14 @@ const WordTable = ({
 
     setNewWord({ ...newWord, [field]: value });
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>

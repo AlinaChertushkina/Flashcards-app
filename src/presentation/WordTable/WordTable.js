@@ -18,9 +18,18 @@ const WordTable = () => {
   };
 
   const handleDelete = (id) => {
-    const updatedWords = words.filter((word) => word.id !== id);
-    setWords(updatedWords);
-    setEditingId(null);
+    // Отправка запроса на удаление на сервер
+    fetch(`http://itgirlschool.justmakeit.ru/api/words/22/delete/${id}`, {
+      method: 'POST',
+    })
+      .then(() => {
+        const updatedWords = words.filter((word) => word.id !== id);
+        setWords(updatedWords);
+        setEditingId(null);
+      })
+      .catch((error) => {
+        console.error('Ошибка:', error);
+      });
   };
 
   const handleSave = () => {
@@ -29,8 +38,19 @@ const WordTable = () => {
         alert('Заполните все поля');
         return;
       }
-      setWords([...words, { ...newWord, id: Date.now().toString() }]);
-      setNewWord({ english: '', russian: '' });
+      // Отправка изменений на сервер
+      fetch(`http://itgirlschool.justmakeit.ru/api/words/22/update/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(newWord),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setWords([...words, { ...data, id: data.id }]);
+          setNewWord({ english: '', russian: '', transcription: '', tags: '' });
+        })
+        .catch((error) => {
+          console.error('Ошибка:', error);
+        });
     } else {
       const updatedWords = words.map((word) =>
         word.id === editingId ? { ...newWord, id: editingId } : word,
